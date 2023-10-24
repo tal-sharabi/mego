@@ -1,0 +1,60 @@
+/*---------------------box----------------------------*/
+.box {
+	display: inline-block;
+	font-size: 25px;
+	width: 49%;
+	vertical-align: middle;
+}
+
+.content {
+	padding: 25px;
+}
+
+
+/*---------------------media----------------------------*/
+@media (max-width:700px)
+
+/*At less of 700px width*/
+	{
+	.box {
+		width: 100%
+			/*u_1_2 width is 100% instead of 50% */
+	}
+}
+
+
+/*---------------------header----------------------------*/
+.header {
+	text-align: center;
+	margin: 25px;
+}
+
+/*---------------------button----------------------------*/
+button {
+	font-size: 20px;
+	padding: 10px;
+	border: 2px solid;
+	margin-top: 20px;
+}
+
+/*---------------------image----------------------------*/
+img {
+	width: 100%;
+	border: 2px solid;
+}
+
+a {
+	text-decoration: none;
+	font-size: 25px;
+}
+
+
+/*---------------------global----------------------------*/
+* {
+	direction: ltr;
+	/*Set the line height for the element*/
+	line-height: 150%;
+	/*The vertical-align property sets the vertical alignment of an element.*/
+	margin: 0;
+	word-spacing: 6px;
+}
