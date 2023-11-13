@@ -1,0 +1,82 @@
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid;"></canvas>
+<br>
+<p>X:</p>
+<p id="x_value">--</p>
+<p>Y:</p>
+<p id="y_value">--</p>
+<p>Score:</p>
+<p id="score">0</p>
+<script>
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+let direction = 'right';
+let x_snake = 100;
+let y_snake = 100;
+let score = 0;
+let x_apple = Math.floor(Math.random() * 15) * 20;
+let y_apple = Math.floor(Math.random() * 15) * 20;
+
+// Initialize the enemy's position
+let x_enemy = Math.floor(Math.random() * 15) * 20;
+let y_enemy = Math.floor(Math.random() * 15) * 20;
+
+function TimeEventHandler() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Move the snake based on the current direction
+    if (direction === 'right' && x_snake < 280)
+        x_snake += 20;
+    if (direction === 'left' && x_snake > 0)
+        x_snake -= 20;
+    if (direction === 'down' && y_snake < 280)
+        y_snake += 20;
+    if (direction === 'up' && y_snake > 0)
+        y_snake -= 20;
+
+    document.getElementById("x_value").innerHTML = x_snake;
+    document.getElementById("y_value").innerHTML = y_snake;
+
+    // Check if the snake catches the apple
+    if (x_snake === x_apple && y_snake === y_apple) {
+        x_apple = Math.floor(Math.random() * 15) * 20;
+        y_apple = Math.floor(Math.random() * 15) * 20;
+        score++;
+        document.getElementById("score").innerHTML = score;
+    }
+
+    // Draw the snake
+    ctx.fillStyle = "black";
+    ctx.fillRect(x_snake, y_snake, 20, 20);
+
+    // Draw the red apple
+    ctx.fillStyle = "red";
+    ctx.fillRect(x_apple, y_apple, 20, 20);
+
+    // Move the enemy
+    moveEnemy();
+
+    // Check if the enemy touches the snake
+    if (x_enemy === x_snake && y_enemy === y_snake) {
+        gameOver();
+        return;
+    }
+
+    // Draw the enemy
+    ctx.fillStyle = "blue";
+    ctx.fillRect(x_enemy, y_enemy, 20, 20);
+}
+
+function moveEnemy() {
+    // You can implement the logic to move the enemy here
+    // For example, you can randomly change the enemy's position
+    // or move it toward the snake
+    // Ensure that the enemy's new position is within the canvas boundaries
+
+    // For simplicity, let's make the enemy move randomly
+    const randomMove = Math.floor(Math.random() * 4); // 0: up, 1: down, 2: left, 3: right
+
+    if (randomMove === 0 && y_enemy > 0) {
+        y_enemy -= 20; // Move up
+    } else if (randomMove === 1 && y_enemy < 280) {
+        y_enemy += 20; // Move down
+    } else if (randomMove === 2 && x_enemy >
