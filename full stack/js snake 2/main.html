@@ -1,0 +1,217 @@
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid;"></canvas>
+<h4>Level:</h4>
+<h4 id="level_value">--</h4>
+<h4>Score:</h4>
+<h4 id="score_value">--</h4>
+<h4>Record score:</h4>
+<h4 id="record_score_value">--</h4>
+
+<script>
+    //-----------------------------------------------------
+    function keyDownEventHandler() {
+        if (event.keyCode == 40 && direction != "up" && direct!=0){
+            direction = "down";
+            direct = 0;}
+        if (event.keyCode == 38 && direction != "down" && direct!=0){
+            direction = "up";
+            direct = 0;}
+        if (event.keyCode == 37 && direction != "right" && direct!=0){
+            direction = "left";
+            direct = 0;}
+        if (event.keyCode == 39 && direction != "left" && direct!=0){
+            direction = "right";
+            direct = 0;}
+    }
+
+    function TimeEventHandler()
+    {
+        if (score  % 90 == 0 && score != 0){
+        clearInterval(first_interval);
+        interval = fast;
+        first_interval = setInterval(TimeEventHandler, interval);}
+
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, 300, 300);
+        direct = 1;
+
+        if (player_x == 300)
+            player_x = 0;
+        if (player_x == -20)
+            player_x = 280;
+        if (player_y == 300)
+            player_y = 0;
+        if (player_y == -20)
+            player_y = 280;
+
+        player_q = player_o; player_r = player_p; 
+        player_o = player_m; player_p = player_n; 
+        player_m = player_k; player_n = player_l; 
+        player_k = player_i; player_l = player_j; 
+        player_i = player_g; player_j = player_h;       
+        player_g = player_e; player_h = player_f;       
+        player_e = player_c; player_f = player_d;       
+        player_c = player_a; player_d = player_b;  
+        player_a = player_x; player_b = player_y;
+        
+    
+        if (direction == "right")
+            player_x += 20;
+        if (direction == "left")
+            player_x -= 20;
+        if (direction == "down")
+            player_y += 20;
+        if (direction == "up")
+            player_y -= 20;
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(player_x, player_y, 20, 20);
+        ctx.fillStyle = "black";
+        ctx.fillRect(player_a, player_b, 20, 20);
+        
+        if (player_x == apple_x && player_y == apple_y) {
+            audio_eat.play();
+            score += 10;
+            speed += 10;         
+            apple_x = Math.floor(Math.random() * 14) * 20;
+            apple_y = Math.floor(Math.random() * 14) * 20;
+            ctx.fillStyle = "gray";
+            ctx.fillRect(player_x, player_y, 20, 20);
+        }
+
+        if (speed >= 10){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_c, player_d, 20, 20);
+        }   
+         if (speed >= 20){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_e, player_f, 20, 20);
+        }
+        if (speed >= 30){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_g, player_h, 20, 20);
+        }
+        if (speed >= 40){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_i, player_j, 20, 20);
+        }
+        if (speed >= 50){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_k, player_l, 20, 20);
+        } 
+        if (speed >= 60){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_m, player_n, 20, 20);
+        }    
+        if (speed >= 70){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_o, player_p, 20, 20);
+        }  
+        if (speed >= 80){
+            ctx.fillStyle = "black";
+            ctx.fillRect(player_q, player_r, 20, 20);
+        }
+    
+           
+        if (speed == 90){
+            audio_succes.play();
+            speed = 0;
+            level += 1;
+            fast -= 25;
+        }
+
+        if ((player_x == obstacle_a && player_y == obstacle_b)
+          ||(player_x == obstacle_c && player_y == obstacle_d)
+          ||(player_x == obstacle_e && player_y == obstacle_f)
+          ||(player_x == obstacle_g && player_y == obstacle_h)
+          ||(player_x == obstacle_i && player_y == obstacle_j)
+          ||(player_x == obstacle_k && player_y == obstacle_l)
+          ||(player_x == player_g && player_y == player_h && speed >= 30)
+          ||(player_x == player_i && player_y == player_j && speed >= 40)
+          ||(player_x == player_k && player_y == player_l && speed >= 50)
+          ||(player_x == player_m && player_y == player_n && speed >= 60)
+          ||(player_x == player_o && player_y == player_p && speed >= 70)
+          ||(player_x == player_q && player_y == player_r && speed >= 80)
+          ){
+            img.src = "boom.jpeg";
+            audio_boom.play();
+            img.onload = function() {
+            ctx.drawImage(img, player_x, player_y, 20, 20);
+            direction = "";
+            score = 0;
+            level = 1;
+            setTimeout(function() {  
+            player_x = 100; player_y = 100;
+            apple_x = 40; apple_y = 40;
+            }, 2400);}
+            fast = 200;
+            speed = 0; 
+            clearInterval(first_interval);
+            interval = 200;
+            first_interval = setInterval(TimeEventHandler, interval);      
+}
+
+
+        if ((apple_x == obstacle_a && apple_y == obstacle_b)
+          ||(apple_x == obstacle_c && apple_y == obstacle_d)
+          ||(apple_x == obstacle_e && apple_y == obstacle_f)
+          ||(apple_x == obstacle_g && apple_y == obstacle_h)
+          ||(apple_x == obstacle_i && apple_y == obstacle_j)
+          ||(apple_x == obstacle_k && apple_y == obstacle_l)){
+            apple_x = 40; apple_y = 40;
+          }
+
+        if (record_score < score)
+            record_score = score;
+        
+    
+        document.getElementById("score_value").innerHTML = score;
+        document.getElementById("record_score_value").innerHTML = record_score;
+        document.getElementById("level_value").innerHTML = level;
+
+        ctx.fillStyle = "gold";
+        ctx.fillRect(apple_x, apple_y, 20, 20); 
+        ctx.fillStyle = "brown";
+        ctx.fillRect(obstacle_a, obstacle_b, 20, 20);
+        ctx.fillStyle = "brown";
+        ctx.fillRect(obstacle_c, obstacle_d, 20, 20);
+        ctx.fillStyle = "brown";
+        ctx.fillRect(obstacle_e, obstacle_f, 20, 20);
+        ctx.fillStyle = "brown";
+        ctx.fillRect(obstacle_g, obstacle_h, 20, 20);
+        ctx.fillStyle = "brown";
+        ctx.fillRect(obstacle_i, obstacle_j, 20, 20);
+        ctx.fillStyle = "brown";
+        ctx.fillRect(obstacle_k, obstacle_l, 20, 20);      
+    }
+
+    //-----------------------------------------------------
+    ctx = document.getElementById('myCanvas').getContext('2d');
+    var player_x = 100; player_y = 100; player_a = 90; player_b = 100;
+    var player_c = 80; player_d = 100; player_e = 70; player_f = 100;
+    var player_g = 60; player_h = 100; player_i = 50; player_j = 100;
+    var player_k = 40; player_l = 100; player_m = 30; player_n = 100;
+    var player_o = 20; player_p = 100; player_q = 10; player_r = 100;
+
+    var obstacle_a = 240; obstacle_b = 160; obstacle_c = 240;  
+    var obstacle_d = 180; obstacle_e = 240; obstacle_f = 200;
+
+    var obstacle_g = 140; obstacle_h = 60; obstacle_i = 160;
+    var obstacle_j = 60; obstacle_k = 180; obstacle_l = 60;
+
+    var direction = "right"; direct = 0;
+    var level = 1
+    var score = 0; speed = 0; record_score = 0;
+    var apple_x = 40; apple_y = 40;
+    var interval = 200; fast = 200;
+    var img = new Image();
+    var audio_boom = new Audio('boom.mp3');
+    var audio_eat = new Audio('eat.mp3');
+    var audio_succes = new Audio('succes.mp3');
+
+
+   
+    var first_interval = setInterval(TimeEventHandler, interval);
+   
+    document.onkeydown = keyDownEventHandler;
+
+</script>
