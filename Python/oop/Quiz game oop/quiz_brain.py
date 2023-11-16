@@ -20,6 +20,6 @@ class QuizBrain:
             self.score += 1  # Add 10 points for each correct answer
         else:
             print("That's wrong.")
-        print(f"The correct answer was: {correct_answer}")
+            print(f"The correct answer was: {correct_answer}")
         print(f"Your current score is: {self.score}")
         print("\n")
