@@ -1,47 +1,43 @@
-def caesar_cipher(text, offset, encrypt=True):
-    result = ""
-    for char in text:
-        if 'a' <= char <= 'z':
-            base = ord('a')
-        elif 'A' <= char <= 'Z':
-            base = ord('A')
-        else:
-            result += char
-            continue
+import turtle
 
-        if encrypt:
-            result += chr(((ord(char) - base + offset) % 26) + base)
-        else:
-            result += chr(((ord(char) - base - offset) % 26) + base)
+# Function to move the turtle forward
+def move_forward():
+    etch_a_sketch.forward(10)
 
-    return result
+# Function to move the turtle backward
+def move_backward():
+    etch_a_sketch.backward(10)
 
+# Function to turn the turtle left
+def turn_left():
+    etch_a_sketch.left(10)
 
-def main():
-    while True:
-        choice = input("Choose what you'd like to do:\nEncrypt (press 1)\nDecrypt (press 2)\n---> ")
+# Function to turn the turtle right
+def turn_right():
+    etch_a_sketch.right(10)
 
-        if choice == '1':
-            action = "encrypt"
-        elif choice == '2':
-            action = "decrypt"
-        else:
-            continue
+# Function to clear the drawing
+def clear_drawing():
+    etch_a_sketch.clear()
+    etch_a_sketch.penup()
+    etch_a_sketch.goto(0, 0)
+    etch_a_sketch.pendown()
 
-        text = input(f"Enter the text to {action}: ")
-        offset = int(input(f"OK, enter the offset >>> "))
+# Set up the screen
+screen = turtle.Screen()
+screen.title("Etch A Sketch")
 
-        if choice == '1':
-            result = caesar_cipher(text, offset)
-        elif choice == '2':
-            result = caesar_cipher(text, offset, encrypt=False)
+# Create the turtle
+etch_a_sketch = turtle.Turtle()
+etch_a_sketch.speed(1)  # Adjust the speed as needed
 
-        print(f"{action.capitalize()}ed sentence: {result}")
+# Bind keys to functions
+screen.listen()
+screen.onkey(move_forward, "w")
+screen.onkey(move_backward, "s")
+screen.onkey(turn_left, "a")
+screen.onkey(turn_right, "d")
+screen.onkey(clear_drawing, "c")
 
-        continue_choice = input("Would you like to continue or quit? (C or Q)\n")
-        if continue_choice.lower() != 'c':
-            break
-
-
-print("Welcome to the cypher program\n")
-main()
+# Keep the window open
+turtle.done()
