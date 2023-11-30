@@ -11,6 +11,7 @@
 !*.py
 !*.js
 !*.css
+!*.asm
 *.pdf
 .idea/
 
