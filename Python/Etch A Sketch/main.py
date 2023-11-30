@@ -18,6 +18,7 @@ def turn_right():
 
 
 def clear_drawing():
+
     Tal.clear()
     Tal.penup()
     Tal.goto(0, 0)
