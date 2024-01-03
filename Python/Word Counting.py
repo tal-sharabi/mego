@@ -1,6 +1,5 @@
 file_path_original = input("Enter the file path: ")
-file_path_corrected = file_path_original.replace("\\", "/").replace("\"","")
-print(file_path_corrected)
+file_path_corrected = file_path_original.replace("\\", "/").replace("\"", "").lower()
 with open(file_path_corrected, 'r') as file:
     # Read the entire file content
     content = file.read()
@@ -19,6 +18,7 @@ with open(file_path_corrected, 'r') as file:
             if word == words_list[i]:
                 counter += 1
         print(word, counter)
+
 
 
 
