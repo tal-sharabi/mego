@@ -1,41 +1,40 @@
-[
+db.produce.insert([
   {
-    "produce": [
-      {
-        "name": "cucumber",
-        "category": "vegetable",
-        "color": "green",
-        "level_of_resistance": "high",
-        "price_per_kilo": 1.2
-      },
-      {
-        "name": "banana",
-        "category": "fruit",
-        "color": "yellow",
-        "level_of_resistance": "medium",
-        "price_per_kilo": 1.3
-      },
-      {
-        "name": "carrot",
-        "category": "vegetable",
-        "color": "orange",
-        "level_of_resistance": "medium",
-        "price_per_kilo": 0.8
-      },
-      {
-        "name": "apple",
-        "category": "fruit",
-        "color": "red",
-        "level_of_resistance": "high",
-        "price_per_kilo": 2.0
-      },
-      {
-        "name": "lettuce",
-        "category": "vegetable",
-        "color": "green",
-        "level_of_resistance": "low",
-        "price_per_kilo": 1.5
-      }
-    ]
+    name: "cucumber",
+    category: "vegetable",
+    color: "green",
+    level_of_resistance: "high",
+    price_per_kilo: 1.2
+  },
+  {
+    name: "banana",
+    category: "fruit",
+    color: "yellow",
+    level_of_resistance: "medium",
+    price_per_kilo: 1.3
+  },
+  {
+    name: "carrot",
+    category: "vegetable",
+    color: "orange",
+    level_of_resistance: "medium",
+    price_per_kilo: 0.8
+  },
+  {
+    name: "apple",
+    category: "fruit",
+    color: "red",
+    level_of_resistance: "high",
+    price_per_kilo: 2.0
+  },
+  {
+    name: "lettuce",
+    category: "vegetable",
+    color: "green",
+    level_of_resistance: "low",
+    price_per_kilo: 1.5
   }
-]
+])
+
+
+
